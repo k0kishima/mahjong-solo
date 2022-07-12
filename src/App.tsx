@@ -4,20 +4,20 @@ import { Hand } from '@/components';
 import { Tile } from '@/types';
 
 const tiles: Tile[] = [
-  { tileType: 'MAN', tileNumber: 2 },
-  { tileType: 'MAN', tileNumber: 3 },
-  { tileType: 'MAN', tileNumber: 6 },
-  { tileType: 'MAN', tileNumber: 7 },
-  { tileType: 'MAN', tileNumber: 7 },
-  { tileType: 'PIN', tileNumber: 2 },
-  { tileType: 'PIN', tileNumber: 3 },
-  { tileType: 'PIN', tileNumber: 9 },
-  { tileType: 'PIN', tileNumber: 9 },
-  { tileType: 'SOU', tileNumber: 2 },
-  { tileType: 'SOU', tileNumber: 3 },
-  { tileType: 'SOU', tileNumber: 4 },
-  { tileType: 'SOU', tileNumber: 5 },
-  { tileType: 'SOU', tileNumber: 6 },
+  { tileColor: 'MAN', tileNumber: 2 },
+  { tileColor: 'MAN', tileNumber: 3 },
+  { tileColor: 'MAN', tileNumber: 6 },
+  { tileColor: 'MAN', tileNumber: 7 },
+  { tileColor: 'MAN', tileNumber: 7 },
+  { tileColor: 'PIN', tileNumber: 2 },
+  { tileColor: 'PIN', tileNumber: 3 },
+  { tileColor: 'PIN', tileNumber: 9 },
+  { tileColor: 'PIN', tileNumber: 9 },
+  { tileColor: 'SOU', tileNumber: 2 },
+  { tileColor: 'SOU', tileNumber: 3 },
+  { tileColor: 'SOU', tileNumber: 4 },
+  { tileColor: 'SOU', tileNumber: 5 },
+  { tileColor: 'SOU', tileNumber: 6 },
 ];
 
 function App() {

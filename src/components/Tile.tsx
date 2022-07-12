@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { TileType, TileNumber } from '@/types';
+import { TileColor, TileNumber } from '@/types';
 
 type Props = {
-  tileType: TileType;
+  tileColor: TileColor;
   tileNumber: TileNumber;
 };
 
-export const Tile: React.FC<Props> = ({ tileType, tileNumber }: Props) => {
+export const Tile: React.FC<Props> = ({ tileColor, tileNumber }: Props) => {
   const [image, setImage] = useState('');
 
   const fileNamePrefix = (() => {
-    switch (tileType) {
+    switch (tileColor) {
       case 'MAN':
         return 'm';
       case 'PIN':
@@ -25,7 +25,7 @@ export const Tile: React.FC<Props> = ({ tileType, tileNumber }: Props) => {
   })();
 
   const fileNameSuffix = (() => {
-    switch (tileType) {
+    switch (tileColor) {
       case 'MAN':
       case 'PIN':
       case 'SOU':
