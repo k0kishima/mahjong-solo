@@ -1,4 +1,10 @@
-import { ALL_TILE_COLORS, ALL_TILE_NUMBERS, Tile } from '@/types';
+import {
+  ALL_TILE_COLORS,
+  ALL_TILE_NUMBERS,
+  Tile,
+  TileColor,
+  TileNumber,
+} from '@/types';
 
 export const createAllTiles = (shuffle = true): Tile[] => {
   const tiles: Tile[] = [];
@@ -19,4 +25,40 @@ export const createAllTiles = (shuffle = true): Tile[] => {
   }
 
   return tiles.filter((tile) => tile.id < 136);
+};
+
+export const serializeTiles = (tiles: Tile[]): string => {
+  const numbersIndexedColor: { [key in TileColor]: TileNumber[] } = {
+    MAN: [],
+    PIN: [],
+    SOU: [],
+    HONORS: [],
+  };
+
+  for (const tile of tiles) {
+    numbersIndexedColor[tile.tileColor].push(tile.tileNumber);
+  }
+
+  return Object.keys(numbersIndexedColor)
+    .map((color) => {
+      const numbers = numbersIndexedColor[color as TileColor];
+      return numbers.length > 0
+        ? numbers.join('') +
+            _convertTileColorToSerializedMark(color as TileColor)
+        : '';
+    })
+    .join('');
+};
+
+const _convertTileColorToSerializedMark = (color: TileColor) => {
+  switch (color) {
+    case 'MAN':
+      return 'm';
+    case 'PIN':
+      return 'p';
+    case 'SOU':
+      return 's';
+    case 'HONORS':
+      return 'z';
+  }
 };
