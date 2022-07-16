@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { serializeTiles } from '@/utils/tiles';
 import { Hand } from '@/components';
 import { useGameStore } from '../stores/games';
+import { getShanten } from '../api/getShanten';
 
 export const Board: React.FC = () => {
   const { hand } = useGameStore();
+
+  useEffect(() => {
+    (async () => {
+      // TODO: 上がってたらページ移動
+      if (hand.length > 0) {
+        const shanten = await getShanten(serializeTiles(hand));
+      }
+    })();
+  }, []);
 
   return (
     <Styled>
