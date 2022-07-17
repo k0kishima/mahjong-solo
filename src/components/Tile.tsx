@@ -2,11 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { TileColor, TileNumber } from '@/types';
 
 type Props = {
+  id: number;
   tileColor: TileColor;
   tileNumber: TileNumber;
+  selectTile: (tileIndex: number) => void;
 };
 
-export const Tile: React.FC<Props> = ({ tileColor, tileNumber }: Props) => {
+export const Tile: React.FC<Props> = ({
+  id,
+  tileColor,
+  tileNumber,
+  selectTile,
+}: Props) => {
   const [image, setImage] = useState('');
 
   const fileNamePrefix = (() => {
@@ -51,5 +58,9 @@ export const Tile: React.FC<Props> = ({ tileColor, tileNumber }: Props) => {
     fetchImage();
   }, []);
 
-  return <img src={image} />;
+  return (
+    <div onClick={() => selectTile(id)}>
+      <img src={image} />
+    </div>
+  );
 };

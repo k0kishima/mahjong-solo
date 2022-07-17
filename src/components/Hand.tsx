@@ -5,9 +5,10 @@ import { Tile } from '@/types';
 
 type Props = {
   tiles: Tile[];
+  selectTile: (tileIndex: number) => void;
 };
 
-export const Hand: React.FC<Props> = ({ tiles }: Props) => {
+export const Hand: React.FC<Props> = ({ tiles, selectTile }: Props) => {
   const Styled = styled.div`
     .tile-container {
       display: flex;
@@ -37,8 +38,8 @@ export const Hand: React.FC<Props> = ({ tiles }: Props) => {
   return (
     <Styled>
       <div className='tile-container'>
-        {tiles.map((tile, i) => (
-          <TilePresentation {...tile} key={i} />
+        {tiles.map((tile) => (
+          <TilePresentation {...tile} key={tile.id} selectTile={selectTile} />
         ))}
       </div>
     </Styled>
