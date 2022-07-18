@@ -8,9 +8,10 @@ import { useGameStore } from '../stores/games';
 import { getShantenAdvanceableTiles } from '../api/getShantenAdvanceableTiles';
 import { getShanten } from '../api/getShanten';
 import { HandAdvancingInformation } from './HandAdvancingInformation';
+import { DiscardedTileList } from './DiscardedTileList';
 
 export const Board: React.FC = () => {
-  const { hand } = useGameStore();
+  const { hand, discardedTiles, discard, draw } = useGameStore();
   const [selectedTileId, setSelectedTileId] = useState<number | undefined>(
     undefined
   );
@@ -41,8 +42,8 @@ export const Board: React.FC = () => {
 
   const selectTile = (tileId: number) => {
     if (selectedTileId === tileId) {
-      // TODO: implement
-      alert('discard and draw a tile');
+      discard(tileId);
+      draw();
     } else {
       setSelectedTileId(tileId);
       openModal();
@@ -51,7 +52,9 @@ export const Board: React.FC = () => {
 
   return (
     <Styled>
-      <div className='main'></div>
+      <div className='main'>
+        <DiscardedTileList tiles={discardedTiles} />
+      </div>
       <div className='hand'>
         <Hand
           tiles={hand}
