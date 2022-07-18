@@ -1,29 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Tile as TilePresentation } from './Tile';
+import { Tile as TilePresentation } from '@/components/Tile';
 import { Tile } from '@/types';
 
 type Props = {
   tiles: Tile[];
-  selectTile: (tileIndex: number) => void;
-  currentSelectedTileId?: number;
 };
 
-export const Hand: React.FC<Props> = ({
-  tiles,
-  selectTile,
-  currentSelectedTileId,
-}: Props) => {
+export const DiscardedTileList: React.FC<Props> = ({ tiles }: Props) => {
   const Styled = styled.div`
     .tile-container {
+      padding: 10px;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-wrap: wrap;
     }
-
     .tile-container img {
-      width: auto;
-      height: auto;
+      margin: 0px 3px;
     }
 
     @media screen and (orientation: portrait) {
@@ -38,22 +30,19 @@ export const Hand: React.FC<Props> = ({
         max-height: 10vh;
       }
     }
-
-    .selected img {
-      opacity: 0.5;
-    }
   `;
 
   return (
     <Styled>
       <div className='tile-container'>
         {tiles.map((tile) => (
-          <div
-            className={currentSelectedTileId === tile.id ? 'selected' : ''}
+          <TilePresentation
+            {...tile}
             key={tile.id}
-          >
-            <TilePresentation {...tile} key={tile.id} selectTile={selectTile} />
-          </div>
+            selectTile={(dummy) => {
+              dummy;
+            }}
+          />
         ))}
       </div>
     </Styled>
