@@ -53,7 +53,11 @@ export const Board: React.FC = () => {
     <Styled>
       <div className='main'></div>
       <div className='hand'>
-        <Hand tiles={hand} selectTile={selectTile} />
+        <Hand
+          tiles={hand}
+          selectTile={selectTile}
+          currentSelectedTileId={selectedTileId}
+        />
       </div>
       <Modal>
         <HandAdvancingInformation

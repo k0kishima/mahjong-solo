@@ -6,9 +6,14 @@ import { Tile } from '@/types';
 type Props = {
   tiles: Tile[];
   selectTile: (tileIndex: number) => void;
+  currentSelectedTileId?: number;
 };
 
-export const Hand: React.FC<Props> = ({ tiles, selectTile }: Props) => {
+export const Hand: React.FC<Props> = ({
+  tiles,
+  selectTile,
+  currentSelectedTileId,
+}: Props) => {
   const Styled = styled.div`
     .tile-container {
       display: flex;
@@ -33,13 +38,22 @@ export const Hand: React.FC<Props> = ({ tiles, selectTile }: Props) => {
         max-height: 10vh;
       }
     }
+
+    .selected img {
+      opacity: 0.5;
+    }
   `;
 
   return (
     <Styled>
       <div className='tile-container'>
         {tiles.map((tile) => (
-          <TilePresentation {...tile} key={tile.id} selectTile={selectTile} />
+          <div
+            className={currentSelectedTileId === tile.id ? 'selected' : ''}
+            key={tile.id}
+          >
+            <TilePresentation {...tile} key={tile.id} selectTile={selectTile} />
+          </div>
         ))}
       </div>
     </Styled>
