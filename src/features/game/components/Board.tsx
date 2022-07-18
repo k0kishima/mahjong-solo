@@ -46,6 +46,9 @@ export const Board: React.FC = () => {
     if (selectedTileId === tileId) {
       discard(tileId);
       draw();
+      if (isOpen) {
+        closeModal();
+      }
     } else {
       setSelectedTileId(tileId);
       openModal();
@@ -104,6 +107,12 @@ const Styled = styled.div`
   }
 
   .hand {
+    position: fixed;
+    display: flex;
+    left: 50%;
+    transform: translate(-50%);
+    align-items: center;
+    justify-content: center;
     z-index: 2147483647;
   }
 `;
