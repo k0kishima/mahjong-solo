@@ -27,6 +27,7 @@ export const useGameStore = create<GameStore>((set) => ({
         allTiles[13],
       ],
       tsumoYama: allTiles.slice(14, -1),
+      discardedTiles: [],
     }));
   },
   discard: (discardTileId: number) => {
