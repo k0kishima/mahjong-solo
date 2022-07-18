@@ -10,7 +10,7 @@ type GameStore = {
   // tsumo: () => void,
   // kiri: () => void,
   // ripai: () => void,
-  //wanPai: Tile[];
+  // wanPai: Tile[];
 };
 
 export const useGameStore = create<GameStore>((set) => ({

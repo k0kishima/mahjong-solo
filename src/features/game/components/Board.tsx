@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { useModal } from 'react-hooks-use-modal';
 import { serializeTiles } from '@/utils/tiles';
 import { Hand } from '@/components';
-import { useGameStore } from '../stores/games';
-import { getShanten } from '../api/getShanten';
 import { Tile } from '@/types';
+import { useGameStore } from '../stores/games';
 import { getShantenAdvanceableTiles } from '../api/getShantenAdvanceableTiles';
+import { getShanten } from '../api/getShanten';
 import { HandAdvancingInformation } from './HandAdvancingInformation';
 
 export const Board: React.FC = () => {
@@ -14,6 +14,8 @@ export const Board: React.FC = () => {
   const [selectedTileId, setSelectedTileId] = useState<number | undefined>(
     undefined
   );
+  const [shanten, setShanten] = useState<number | undefined>(undefined);
+  const [nextShanten, setNextShanten] = useState<number | undefined>(undefined);
   const [shantenAdvanceableTiles, setShantenAdvanceableTiles] = useState<
     Tile[]
   >([]);
@@ -22,23 +24,17 @@ export const Board: React.FC = () => {
   });
 
   useEffect(() => {
-    (async () => {
-      // TODO: 上がってたらページ移動
-      if (hand.length > 0) {
-        const shanten = await getShanten(serializeTiles(hand));
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
     if (selectedTileId) {
-      const oneLineStringtiles = serializeTiles(
-        hand.filter((tile: Tile) => tile.id !== selectedTileId)
-      );
       (async () => {
-        const tiles = await getShantenAdvanceableTiles(oneLineStringtiles);
-        setShantenAdvanceableTiles(tiles);
-        console.log(tiles);
+        setShanten(await getShanten(serializeTiles(hand)));
+
+        const serializedAfterDiscardHand = serializeTiles(
+          hand.filter((tile: Tile) => tile.id !== selectedTileId)
+        );
+        setShantenAdvanceableTiles(
+          await getShantenAdvanceableTiles(serializedAfterDiscardHand)
+        );
+        setNextShanten(await getShanten(serializedAfterDiscardHand));
       })();
     }
   }, [selectedTileId]);
@@ -60,7 +56,11 @@ export const Board: React.FC = () => {
         <Hand tiles={hand} selectTile={selectTile} />
       </div>
       <Modal>
-        <HandAdvancingInformation tiles={shantenAdvanceableTiles} />
+        <HandAdvancingInformation
+          tiles={shantenAdvanceableTiles}
+          currentShanten={shanten}
+          nextShanten={nextShanten}
+        />
       </Modal>
     </Styled>
   );
