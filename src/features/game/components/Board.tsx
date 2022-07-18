@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModal } from 'react-hooks-use-modal';
+import { useNavigate } from 'react-router-dom';
 import { serializeTiles } from '@/utils/tiles';
 import { Hand } from '@/components';
 import { Tile } from '@/types';
@@ -11,6 +12,7 @@ import { HandAdvancingInformation } from './HandAdvancingInformation';
 import { DiscardedTileList } from './DiscardedTileList';
 
 export const Board: React.FC = () => {
+  const navigate = useNavigate();
   const { hand, discardedTiles, discard, draw } = useGameStore();
   const [selectedTileId, setSelectedTileId] = useState<number | undefined>(
     undefined
@@ -49,6 +51,10 @@ export const Board: React.FC = () => {
       openModal();
     }
   };
+
+  if (shanten && shanten < 0) {
+    navigate('/result', { replace: true });
+  }
 
   return (
     <Styled>
@@ -95,5 +101,9 @@ const Styled = styled.div`
     .hand {
       height: 10vh;
     }
+  }
+
+  .hand {
+    z-index: 2147483647;
   }
 `;
