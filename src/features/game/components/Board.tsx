@@ -27,10 +27,20 @@ export const Board: React.FC = () => {
   });
 
   useEffect(() => {
+    (async () => {
+      setShanten(await getShanten(serializeTiles(hand)));
+    })();
+  }, [hand]);
+
+  useEffect(() => {
+    if (shanten && shanten < 0) {
+      navigate('/result', { replace: true });
+    }
+  }, [shanten]);
+
+  useEffect(() => {
     if (selectedTileId) {
       (async () => {
-        setShanten(await getShanten(serializeTiles(hand)));
-
         const serializedAfterDiscardHand = serializeTiles(
           hand.filter((tile: Tile) => tile.id !== selectedTileId)
         );
@@ -54,10 +64,6 @@ export const Board: React.FC = () => {
       openModal();
     }
   };
-
-  if (shanten && shanten < 0) {
-    navigate('/result', { replace: true });
-  }
 
   return (
     <Styled>
