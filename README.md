@@ -1,46 +1,42 @@
-# Getting Started with Create React App
+# README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 概要
 
-## Available Scripts
+- 上がるまでツモる、切るを一人で繰り返す
+- 切るときは、待ち牌の変化やシャンテン数の増減を視覚的に確認できるので、それで牌効率を学習することを目的としている
 
-In the project directory, you can run:
+## 開発環境構築手順
 
-### `yarn start`
+```bash
+$ git clone git@github.com:k0kishima/mahjong-solo.git
+$ cd mahjong-solo 
+$ yarn install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 遊び方
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+ローカルでの場合の一例
 
-### `yarn test`
+### 依存サービスの環境構築
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+依存サービスである麻雀APIを起動しておく
 
-### `yarn build`
+- https://github.com/k0kishima/mahjong_api
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 環境変数の設定
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+環境変数を設定して前節のAPIへリクエストが向くようにする
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+https://github.com/k0kishima/mahjong-solo/blob/117e064917913af3b85258bee8815fcaabf4500a/src/config/index.ts#L2
 
-### `yarn eject`
+### 起動
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+yarn start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+こんな感じで遊べます。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+https://user-images.githubusercontent.com/56298669/194043753-664ae2e2-1e83-48ad-8db6-adceaea13355.mov
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+※ 現時点でフリテンの考慮などはないです
