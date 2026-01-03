@@ -1,3 +1,7 @@
+# 以下に移動しました！
+
+https://github.com/PaiForge/mahjong-solo
+
 # README
 
 ## 概要
